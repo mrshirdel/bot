@@ -1,36 +1,30 @@
 <?php
-/*
-سورس اصلی ربات پی وی رسان
-@PvResanBot
-دست هیچ بنی بشری نیست و نخواهد بود
+$message=file_get_contents("php://input");
 
-این سورس ای هم که داخل این گیت هاب هست
-سورس ورژن یک پی وی رسان هست
-و پی وی رسان هم اکنون از سورس ورژن های بالاتر استفاده میکند
+$resulte=json_decode($message,true);
+$token="340204096:AAHMuLCMHpJ3_bU6uzYre5VXjl83sYqh7hU";
 
-تیم برنامه نویسی FTC
-با آدرس سایت
-https://feelthecode.com
 
-اولین سازنده ربات پیام رسان فارسی در تلگرام
-و تنها برنامه نویس ربات پی وی رسان می باشد
+if($resulte['message']['text']=='/start'){
+$text="لطفا پیام خود را بنویسید";
 
-لطفا از هیچکس هیچ سورس و یا آموزش تقلبی را خریداری نکنید
-نرم افزار های موجود در سطح اینترنت نیز
-برای ساخت ربات پیام رسان
-کلاه برداری بیش نیستند
+$url="https://api.telegram.org/bot".$token.'/sendMessage?chat_id='.$resulte['message']['chat']['id'].'&text='.$text;
+file_get_contents($url);
 
-در صورت مشاهده این گونه افراد
-حتما با استفاده از فرم تماس با ما
-موجود در وب سایت ما
-یا از طریق تماس با کارشناسان ما
-ما را در جریان قرار دهید تا پیگیری های لازم
-صورت پذیرد
+}
 
-site: https://feelthecode.com
-Telegram Bot: https://telegram.me/PvResanBot
-Telegram Channel: https://telegram.me/PvResan
+else{
+$text="پیام ارسال شد";
 
-یا علی خدا قوت
-*/
+$url="https://api.telegram.org/bot".$token.'/sendMessage?chat_id='.$resulte['message']['chat']['id'].'&text='.$text;
+file_get_contents($url);
+
+$url="https://api.telegram.org/bot".$token.'/forwardMessage?chat_id=304445768&from_chat_id='.$resulte['message']['chat']['id'].'&message_id='.$resulte['message']['message_id'];
+file_get_contents($url);
+
+}
+
 ?>
+
+
+
